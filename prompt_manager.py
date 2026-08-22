@@ -112,6 +112,50 @@ while True:
         prompts.append(new_prompt)
         print("프롬프트가 추가되었습니다.")
 
+    elif choice == "3":
+        categories = [
+            "텍스트 생성",
+            "이미지 생성",
+            "영상 생성",
+            "페르소나",
+            "자동화",
+            "기타"
+        ]
+
+        print("=== 카테고리별 조회 ===")
+
+        for number, category_name in enumerate(categories, start=1):
+            print(f"{number}) {category_name}")
+
+        category_choice = input("선택: ").strip()
+
+        if category_choice.isdigit():
+            category_number = int(category_choice)
+
+            if 1 <= category_number <= len(categories):
+                selected_category = categories[category_number - 1]
+
+                found_count = 0
+
+                print(f"[{selected_category}] 카테고리 프롬프트:")
+
+                for number, prompt in enumerate(prompts, start=1):
+                    if prompt["category"] == selected_category:
+                        favorite_mark = "⭐" if prompt["favorite"] else ""
+                        print(f'{number}. {prompt["title"]} {favorite_mark}')
+                        found_count = found_count + 1
+
+                if found_count == 0:
+                    print("해당 카테고리에 등록된 프롬프트가 없습니다.")
+                else:
+                    print("총", found_count, "개의 프롬프트")
+
+            else:
+                print("올바른 카테고리 번호를 입력해주세요.")
+
+        else:
+            print("숫자를 입력해주세요.")        
+
     elif choice == "4":
         keyword = input("검색어: ")
 

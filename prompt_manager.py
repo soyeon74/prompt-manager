@@ -19,7 +19,7 @@ prompts = [
     }
 ]
 
-while True:
+def show_menu():
     print("=== 프롬프트 관리 ===")
     print("1. 프롬프트 목록 보기")
     print("2. 프롬프트 추가")
@@ -30,6 +30,9 @@ while True:
     print("7. 즐겨찾기 목록")
     print("0. 종료")
 
+while True:
+    show_menu() 
+    
     choice = input("선택: ")
 
     if choice == "1":

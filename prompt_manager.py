@@ -33,12 +33,17 @@ while True:
     choice = input("선택: ")
 
     if choice == "1":
-        number = 1
+        if len(prompts) == 0:
+            print("등록된 프롬프트가 없습니다.")
+        else:
+            print("=== 프롬프트 목록 ===")
 
-        for prompt in prompts:
-            print(number, prompt["category"], prompt["title"])
-            number = number + 1
+            for number, prompt in enumerate(prompts, start=1):
+                favorite_mark = "⭐" if prompt["favorite"] else ""
+                print(f'{number}. [{prompt["category"]}] {prompt["title"]} {favorite_mark}')
 
+            print("총", len(prompts), "개의 프롬프트")
+            
     elif choice == "2":
         title = input("제목: ")
         content = input("내용: ")
@@ -124,6 +129,7 @@ while True:
         break
 
     else:
-        print("잘못된 번호입니다. 다시 선택해주세요.")                 
+        print("잘못된 번호입니다. 다시 선택해주세요.")            
+                 
       
 

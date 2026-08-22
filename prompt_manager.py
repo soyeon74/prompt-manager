@@ -66,8 +66,7 @@ while True:
 
         for prompt in prompts:
             if keyword in prompt["title"] or keyword in prompt["content"]:
-                print(prompt["title"])    
-      
+                print(prompt["title"])
 
     elif choice == "5":
         number_text = input("프롬프트 번호: ")
@@ -79,37 +78,15 @@ while True:
                 prompt = prompts[number - 1]
 
                 print("제목:", prompt["title"])
-                print("내용:", prompt["content"])
                 print("카테고리:", prompt["category"])
                 print("즐겨찾기:", prompt["favorite"])
+                print("내용:", prompt["content"])
             else:
                 print("존재하지 않는 프롬프트 번호입니다.")
         else:
-            print("숫자를 입력해주세요.")
+            print("숫자를 입력해주세요.") 
 
     elif choice == "6":
-        number = int(input("프롬프트 번호: "))
-
-        prompt = prompts[number - 1]
-
-        prompt["favorite"] = not prompt["favorite"]
-
-        if prompt["favorite"]:
-            print("즐겨찾기에 추가되었습니다.")
-        else:
-            print("즐겨찾기에서 해제되었습니다.")
-
-    elif choice == "7":
-        for prompt in prompts:
-            if prompt["favorite"]:
-                print(prompt["title"])
-
-    elif choice == "0":
-        print("프로그램을 종료합니다.")
-        break
-
-    else:
-        print("잘못된 번호입니다.")    
         number_text = input("프롬프트 번호: ")
 
         if number_text.isdigit():
@@ -118,35 +95,35 @@ while True:
             if 1 <= number <= len(prompts):
                 prompt = prompts[number - 1]
 
-                print("제목:", prompt["title"])
-                print("내용:", prompt["content"])
-                print("카테고리:", prompt["category"])
-                print("즐겨찾기:", prompt["favorite"])
+                prompt["favorite"] = not prompt["favorite"]
+
+                if prompt["favorite"]:
+                    print("즐겨찾기에 추가되었습니다.")
+                else:
+                    print("즐겨찾기에서 해제되었습니다.")
             else:
                 print("존재하지 않는 프롬프트 번호입니다.")
         else:
             print("숫자를 입력해주세요.")
 
-    elif choice == "6":
-        number = int(input("프롬프트 번호: "))
-
-        prompt = prompts[number - 1]
-
-        prompt["favorite"] = not prompt["favorite"]
-
-        if prompt["favorite"]:
-            print("즐겨찾기에 추가되었습니다.")
-        else:
-            print("즐겨찾기에서 해제되었습니다.")
-            
     elif choice == "7":
-        for prompt in prompts:
+        favorite_count = 0
+
+        for number, prompt in enumerate(prompts, start=1):
             if prompt["favorite"]:
-                print(prompt["title"])
+                print(number, prompt["category"], prompt["title"], "⭐")
+                favorite_count = favorite_count + 1
+
+        if favorite_count == 0:
+            print("즐겨찾기된 프롬프트가 없습니다.")
+        else:
+            print("총", favorite_count, "개의 즐겨찾기")
 
     elif choice == "0":
         print("프로그램을 종료합니다.")
         break
 
     else:
-        print("잘못된 번호입니다.")
+        print("잘못된 번호입니다. 다시 선택해주세요.")                 
+      
+

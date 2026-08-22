@@ -157,11 +157,25 @@ while True:
             print("숫자를 입력해주세요.")        
 
     elif choice == "4":
-        keyword = input("검색어: ")
+        keyword = input("검색어: ").strip().lower()
 
-        for prompt in prompts:
-            if keyword in prompt["title"] or keyword in prompt["content"]:
-                print(prompt["title"])
+        found_count = 0
+
+        print("=== 검색 결과 ===")
+
+        for number, prompt in enumerate(prompts, start=1):
+            title = prompt["title"].lower()
+            content = prompt["content"].lower()
+
+            if keyword in title or keyword in content:
+                favorite_mark = "⭐" if prompt["favorite"] else ""
+                print(f'{number}. [{prompt["category"]}] {prompt["title"]} {favorite_mark}')
+                found_count = found_count + 1
+
+        if found_count == 0:
+            print("검색 결과가 없습니다.")
+        else:
+            print("총", found_count, "개의 프롬프트를 찾았습니다.")
 
     elif choice == "5":
         number_text = input("프롬프트 번호: ")

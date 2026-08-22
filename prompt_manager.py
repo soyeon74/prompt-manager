@@ -45,6 +45,72 @@ def show_list():
 def add_prompt():
     print("=== 프롬프트 추가 ===")
 
+    while True:
+        title = input("제목: ").strip()
+
+        if title != "":
+            break
+
+        print("제목은 비워둘 수 없습니다.")
+
+    while True:
+        content = input("내용: ").strip()
+
+        if content != "":
+            break
+
+        print("내용은 비워둘 수 없습니다.")
+
+    categories = [
+        "텍스트 생성",
+        "이미지 생성",
+        "영상 생성",
+        "페르소나",
+        "자동화",
+        "기타"
+    ]
+
+    print("카테고리 선택:")
+
+    for number, category_name in enumerate(categories, start=1):
+        print(f"{number}) {category_name}")
+
+    print("7) 직접 입력")
+
+    while True:
+        category_choice = input("선택: ").strip()
+
+        if category_choice.isdigit():
+            category_number = int(category_choice)
+
+            if 1 <= category_number <= len(categories):
+                category = categories[category_number - 1]
+                break
+
+            elif category_number == 7:
+                while True:
+                    category = input("새 카테고리 입력: ").strip()
+
+                    if category != "":
+                        break
+
+                    print("카테고리는 비워둘 수 없습니다.")
+
+                break
+
+        print("올바른 번호를 입력해주세요.")
+
+    new_prompt = {
+        "title": title,
+        "content": content,
+        "category": category,
+        "favorite": False
+    }
+
+    prompts.append(new_prompt)
+
+    print("프롬프트가 추가되었습니다.")
+
 def show_by_category():
     categories = [
         "텍스트 생성",

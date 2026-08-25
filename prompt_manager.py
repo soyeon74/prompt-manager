@@ -1,3 +1,6 @@
+import json
+
+
 prompts = [
     {
         "title": "블로그 작성",
@@ -18,6 +21,20 @@ prompts = [
         "favorite": False
     }
 ]
+
+def save_prompts():
+    with open("prompts.json", "w", encoding="utf-8") as file:
+        json.dump(prompts, file, ensure_ascii=False, indent=4)
+
+def load_prompts():
+    global prompts
+
+    try:
+        with open("prompts.json", "r", encoding="utf-8") as file:
+            prompts = json.load(file)
+
+    except FileNotFoundError:
+        save_prompts()
 
 def show_menu():
     print("=== 프롬프트 관리 ===")
@@ -121,6 +138,8 @@ def add_prompt():
 
     prompts.append(new_prompt)
 
+    save_prompts()
+
     print("프롬프트가 추가되었습니다.")
 
 
@@ -168,6 +187,7 @@ def show_by_category():
     else:
         print("숫자를 입력해주세요.")
 
+load_prompts()
 
 while True:
     show_menu() 
@@ -232,6 +252,8 @@ while True:
                 prompt = prompts[number - 1]
 
                 prompt["favorite"] = not prompt["favorite"]
+
+                save_prompts()
 
                 if prompt["favorite"]:
                     print("즐겨찾기에 추가되었습니다.")

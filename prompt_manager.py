@@ -40,7 +40,7 @@ def show_list():
             favorite_mark = "⭐" if prompt["favorite"] else ""
             print(f'{number}. [{prompt["category"]}] {prompt["title"]} {favorite_mark}')
 
-        print("총", len(prompts), "개의 프롬프트")
+        print("총", len(prompts), "개의 프롬프트가 등록되어 있습니다.")
 
 def add_prompt():
     print("=== 프롬프트 추가 ===")

@@ -53,13 +53,25 @@ def add_prompt():
 
         print("제목은 비워둘 수 없습니다.")
 
-    while True:
-        content = input("내용: ").strip()
+    print("내용을 입력하세요.")
+    print("여러 줄을 입력할 수 있습니다.")
+    print("입력이 끝나면 마지막 줄에 END를 입력하세요.")
 
-        if content != "":
+    content_lines = []
+
+    while True:
+        line = input()
+
+        if line.strip() == "END":
             break
 
+        content_lines.append(line)
+
+    content = "\n".join(content_lines).strip()
+
+    if content == "":
         print("내용은 비워둘 수 없습니다.")
+        return
 
     categories = [
         "텍스트 생성",
@@ -110,6 +122,7 @@ def add_prompt():
     prompts.append(new_prompt)
 
     print("프롬프트가 추가되었습니다.")
+
 
 def show_by_category():
     categories = [
